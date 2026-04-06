@@ -305,9 +305,7 @@ body.horizontal-layout {
 /* ========================
    INPUTY
    ======================== */
-input[type="number"],
-input[type="tel"] {
-
+.exercise-input {
     font-size: 1.5rem;
     font-weight: 600;
     width: 140px;
@@ -322,17 +320,10 @@ input[type="tel"] {
     transition: all 0.2s ease;
 }
 
-input[type="number"]:focus,
-input[type="tel"]:focus {
+.exercise-input:focus {
     outline: none;
     border-color: var(--blue-neon);
     box-shadow: var(--shadow-blue);
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
 
 input::-webkit-outer-spin-button,
