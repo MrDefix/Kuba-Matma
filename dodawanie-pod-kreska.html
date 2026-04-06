@@ -4,108 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dodawanie pod kreską do 1000</title>
+  <link rel="stylesheet" href="components.css">
   <style>
     :root {
-      --primary: #3498db;
-      --bg: #f0f4f8;
-      --white: #ffffff;
       --cell-size: 55px;
     }
 
-    /* NAGŁÓWEK */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: var(--white);
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 100;
+    body.with-header {
+      padding-top: 60px;
     }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .header h1 {
-      color: var(--primary);
-      font-size: 1.2rem;
-      margin: 0;
-    }
-
-    .btn-back {
-      background: transparent;
-      color: var(--primary);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: bold;
-      padding: 8px;
-    }
-
-    .hamburger {
-      background: transparent;
-      color: var(--primary);
-      border: none;
-      padding: 8px;
-      cursor: pointer;
-      font-size: 22px;
-      display: none;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
+    body.horizontal-layout {
       display: flex;
       flex-direction: row;
       height: 100vh;
-      background-color: var(--bg);
       overflow: hidden;
-      padding-top: 60px;
-    }
-
-    .main {
-      flex: 1;
-      padding: 20px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @media (max-width: 768px) {
-      :root { --cell-size: 45px; }
-      .hamburger { display: block; }
-      .history {
-        position: fixed;
-        right: 0;
-        top: 60px;
-        height: calc(100% - 60px);
-        z-index: 1000;
-        transform: translateX(100%);
-        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-      }
-      .history.active { transform: translateX(0); }
-    }
-
-    /* HISTORIA */
-    .history {
-      width: 300px;
-      border-left: 2px solid #ddd;
-      padding: 20px;
-      overflow-y: auto;
-      background-color: var(--white);
-      transition: transform 0.3s ease;
     }
 
     /* TABELA MATEMATYCZNA */
@@ -124,11 +36,11 @@
       border: 1px solid #ccc;
     }
     .addition-table td.no-border { border: none; background: none; }
-    
-    /* POLA POMOCNICZE (OBRAMOWANIE) */
-    .carry-row td { 
-      height: 35px; 
-      border: none !important; 
+
+    /* POLA POMOCNICZE */
+    .carry-row td {
+      height: 35px;
+      border: none !important;
       vertical-align: bottom;
     }
     .carry-input {
@@ -136,7 +48,7 @@
       height: 25px;
       text-align: center;
       font-size: 14px;
-      border: 1px dashed #999 !important; /* WIDOCZNE OBRAMOWANIE */
+      border: 1px dashed #999 !important;
       border-radius: 3px;
       color: #666;
       background-color: #fff;
@@ -147,12 +59,11 @@
     .line-row td { border-bottom: 3px solid #333; }
 
     /* INPUTY WYNIKU */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+    input[type=tel] {
+      -moz-appearance: textfield;
+      outline: none;
+      border: none;
     }
-    input[type=tel] { -moz-appearance: textfield; outline: none; border: none; }
 
     .result-input {
       width: 100%;
@@ -173,54 +84,23 @@
       background-color: var(--primary);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       width: 200px;
     }
 
-    .entry { margin-bottom: 8px; font-size: 14px; padding: 8px; border-radius: 4px; border-bottom: 1px solid #eee; }
-    .correct { color: green; background-color: #e8f5e9; }
-    .incorrect { color: red; background-color: #ffebee; }
+    #feedback {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+      min-height: 24px;
+    }
 
-    #feedback { margin-top: 15px; font-weight: bold; font-size: 18px; min-height: 24px; }
-
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       :root { --cell-size: 45px; }
-      .hamburger { display: block; }
-      .history {
-        position: fixed;
-        right: 0;
-        top: 0;
-        height: 100%;
-        z-index: 1000;
-        transform: translateX(100%);
-        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-      }
-      .history.active { transform: translateX(0); }
-    }
-
-    .history-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .history-header h3 {
-      margin: 0;
-    }
-
-    .close-history {
-      background: transparent;
-      color: var(--primary);
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      padding: 4px 10px;
     }
   </style>
 </head>
-<body>
+<body class="with-header horizontal-layout">
   <div class="header">
     <div class="header-left">
       <a href="index.html" class="btn-back">‹</a>
@@ -230,9 +110,6 @@
   </div>
 
   <div class="main">
-    <div id="feedback"></div>
-    <button class="btn-check" onclick="checkAnswer()">Sprawdź</button>
-
     <table class="addition-table">
       <tr class="carry-row">
         <td class="no-border"><input type="tel" class="carry-input" id="c4" maxlength="1"></td>
@@ -298,7 +175,7 @@
       val1 = Math.floor(Math.random() * 850) + 100;
       val2 = Math.floor(Math.random() * (999 - 100)) + 100;
       if (val1 + val2 > 1999) val2 = 1999 - val1;
-      
+
       totalSum = val1 + val2;
 
       const s1 = val1.toString().padStart(3, '0');
@@ -330,7 +207,7 @@
       const isCorrect = userVal === totalSum;
       const log = document.getElementById('historyLog');
       const entry = document.createElement('div');
-      
+
       if (isCorrect) {
         document.getElementById('feedback').innerHTML = "<span style='color:green'>Dobrze!</span>";
         scoreCorrect++;

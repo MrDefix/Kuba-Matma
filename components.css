@@ -1,0 +1,233 @@
+/* ========================
+   WSPÓLNE KOMPONENTY
+   ======================== */
+
+/* Zmienne CSS */
+:root {
+    --primary: #3498db;
+    --bg: #f0f4f8;
+    --white: #ffffff;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --success: #e8f5e9;
+    --error: #ffebee;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+}
+
+body.with-header {
+    padding-top: 60px;
+}
+
+body.horizontal-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ========================
+   NAGŁÓWEK (HEADER)
+   ======================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header h1 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Przycisk back (chevron) */
+.btn-back {
+    background: transparent;
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 8px;
+}
+
+/* Hamburger */
+.hamburger {
+    background: transparent;
+    color: var(--primary);
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 22px;
+    display: none;
+}
+
+/* ========================
+   GŁÓWNY KONTENER
+   ======================== */
+.main {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========================
+   HISTORIA ZADAŃ
+   ======================== */
+.history {
+    width: 300px;
+    border-left: 2px solid #ddd;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: var(--white);
+    transition: transform 0.3s ease;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.history-header h3 {
+    margin: 0;
+}
+
+.close-history {
+    background: transparent;
+    color: var(--primary);
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 4px 10px;
+}
+
+.entry {
+    margin-bottom: 5px;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 4px;
+    border-bottom: 1px solid #eee;
+}
+
+.entry.correct {
+    color: green;
+    background-color: var(--success);
+}
+
+.entry.incorrect {
+    color: red;
+    background-color: var(--error);
+}
+
+/* ========================
+   PRZYCISKI
+   ======================== */
+.btn-check {
+    padding: 12px 30px;
+    font-size: 18px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+/* ========================
+   SELEKTOR TRYB
+   ======================== */
+.mode-selector {
+    margin-bottom: 20px;
+}
+
+.mode-selector label {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+/* ========================
+   INPUTY
+   ======================== */
+input[type="number"] {
+    padding: 12px;
+    font-size: 20px;
+    width: 120px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ========================
+   TYP OGŁOSZENIA
+   ======================== */
+#result {
+    margin-top: 15px;
+    font-size: 18px;
+    min-height: 24px;
+}
+
+/* ========================
+   RESPONSIVE - MOBILE
+   ======================== */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .history {
+        position: fixed;
+        right: 0;
+        top: 60px;
+        height: calc(100% - 60px);
+        z-index: 1000;
+        transform: translateX(100%);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    }
+
+    .history.active {
+        transform: translateX(0);
+    }
+}
