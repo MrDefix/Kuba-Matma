@@ -198,6 +198,27 @@
       }
       .history.active { transform: translateX(0); }
     }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      margin-bottom: 15px;
+    }
+
+    .history-header h3 {
+      margin: 0;
+    }
+
+    .close-history {
+      background: transparent;
+      color: var(--primary);
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 4px 10px;
+    }
   </style>
 </head>
 <body>
@@ -246,7 +267,10 @@
   </div>
 
   <div class="history" id="historyPanel">
-    <h3 style="margin-top: 40px;">Historia zadań</h3>
+    <div class="history-header">
+      <h3>Historia zadań</h3>
+      <button class="close-history" onclick="toggleHistory()">×</button>
+    </div>
     <div id="historyLog"></div>
   </div>
 
