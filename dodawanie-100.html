@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dodawanie i odejmowanie (0–100)</title>
+  <style>
+    :root {
+      --primary: #3498db;
+      --bg: #f0f4f8;
+      --white: #ffffff;
+    }
+
+    /* NAGŁÓWEK */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header h1 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .btn-back {
+      background: transparent;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 8px;
+    }
+
+    .hamburger {
+      background: transparent;
+      color: var(--primary);
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 22px;
+      display: none;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      background-color: var(--bg);
+      overflow: hidden;
+      padding-top: 60px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mode-selector {
+      margin-bottom: 20px;
+    }
+
+    .mode-selector label {
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    #task {
+      font-size: 28px;
+      margin: 20px 0;
+      color: #2c3e50;
+    }
+
+    #answer {
+      padding: 12px;
+      font-size: 20px;
+      width: 120px;
+      text-align: center;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .btn-check {
+      padding: 12px 30px;
+      font-size: 18px;
+      margin-top: 15px;
+      cursor: pointer;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-size: 18px;
+      min-height: 24px;
+    }
+
+    .entry {
+      margin-bottom: 5px;
+      font-size: 14px;
+      padding: 8px;
+      border-radius: 4px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .correct {
+      color: green;
+      background-color: #e8f5e9;
+    }
+
+    .incorrect {
+      color: red;
+      background-color: #ffebee;
+    }
+
+    .history {
+      width: 300px;
+      border-left: 2px solid #ddd;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: var(--white);
+      transition: transform 0.3s ease;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .history-header h3 {
+      margin: 0;
+    }
+
+    .close-history {
+      background: transparent;
+      color: var(--primary);
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 4px 10px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .history {
+        position: fixed;
+        right: 0;
+        top: 60px;
+        height: calc(100% - 60px);
+        z-index: 1000;
+        transform: translateX(100%);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+      }
+      .history.active {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <a href="index.html" class="btn-back">‹</a>
+      <h1>Dodawanie i odejmowanie</h1>
+    </div>
+    <button class="hamburger" onclick="toggleHistory()">☰</button>
+  </div>
+
+  <div class="main">
+    <div class="mode-selector">
+      <label><input type="radio" name="mode" value="mixed" checked onchange="setMode(this.value)"> Mieszane</label>
+      <label><input type="radio" name="mode" value="add" onchange="setMode(this.value)"> Dodawanie</label>
+      <label><input type="radio" name="mode" value="sub" onchange="setMode(this.value)"> Odejmowanie</label>
+    </div>
+
+    <div id="task">Ładowanie zadania...</div>
+    <input type="number" id="answer" placeholder="Odpowiedź" />
+    <br />
+    <button class="btn-check" onclick="checkAnswer()">Sprawdź</button>
+    <div id="result"></div>
+    <p>Poprawne: <span id="correct">0</span> | Błędne: <span id="incorrect">0</span></p>
+  </div>
+
+  <div class="history" id="historyPanel">
+    <div class="history-header">
+      <h3>Historia zadań</h3>
+      <button class="close-history" onclick="toggleHistory()">×</button>
+    </div>
+    <div id="historyLog"></div>
+  </div>
+
+  <script>
+    let a, b, op, correctAnswer;
+    let correct = 0;
+    let incorrect = 0;
+    let mode = "mixed";
+    let taskNumber = 1;
+
+    function setMode(newMode) {
+      mode = newMode;
+      generateTask();
+    }
+
+    function isUnwantedResult(result) {
+      const forbidden = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+      return forbidden.includes(result);
+    }
+
+    function toggleHistory() {
+      document.getElementById('historyPanel').classList.toggle('active');
+    }
+
+    function generateTask() {
+      do {
+        if (mode === "add") {
+          op = '+';
+          a = Math.floor(Math.random() * 101);
+          b = Math.floor(Math.random() * (101 - a));
+          if (a === 0 || b === 0) continue;
+          correctAnswer = a + b;
+        } else if (mode === "sub") {
+          op = '-';
+          a = Math.floor(Math.random() * 101);
+          b = Math.floor(Math.random() * a);
+          if (a === 0 || b === 0 || b === a) continue;
+          correctAnswer = a - b;
+        } else {
+          op = Math.random() < 0.5 ? '+' : '-';
+          if (op === '+') {
+            a = Math.floor(Math.random() * 101);
+            b = Math.floor(Math.random() * (101 - a));
+            if (a === 0 || b === 0) continue;
+            correctAnswer = a + b;
+          } else {
+            a = Math.floor(Math.random() * 101);
+            b = Math.floor(Math.random() * a);
+            if (a === 0 || b === 0 || b === a) continue;
+            correctAnswer = a - b;
+          }
+        }
+      } while (isUnwantedResult(correctAnswer));
+
+      document.getElementById("task").innerText = `${a} ${op} ${b} = ?`;
+      document.getElementById("answer").value = '';
+      document.getElementById("result").innerText = '';
+      document.getElementById("answer").focus();
+    }
+
+    function checkAnswer() {
+      const userAnswer = parseInt(document.getElementById("answer").value, 10);
+
+      if (isNaN(userAnswer)) {
+        document.getElementById("result").innerText = "Wpisz poprawną liczbę.";
+        return;
+      }
+
+      const isCorrect = userAnswer === correctAnswer;
+      const history = document.getElementById("historyLog");
+      const entry = document.createElement("div");
+      entry.className = "entry " + (isCorrect ? "correct" : "incorrect");
+      const symbol = isCorrect ? '✅' : '❌';
+      entry.textContent = `${taskNumber}. ${a} ${op} ${b} = ${userAnswer} ${symbol}`;
+      history.prepend(entry);
+
+      if (isCorrect) {
+        document.getElementById("result").innerHTML = "<span style='color:green'>Dobrze!</span>";
+        correct++;
+      } else {
+        document.getElementById("result").innerHTML = "<span style='color:red'>Błąd! Poprawna odpowiedź: " + correctAnswer + "</span>";
+        incorrect++;
+      }
+
+      document.getElementById("correct").innerText = correct;
+      document.getElementById("incorrect").innerText = incorrect;
+
+      taskNumber++;
+      setTimeout(generateTask, 1500);
+    }
+
+    document.getElementById("answer").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        checkAnswer();
+      }
+    });
+
+    generateTask();
+  </script>
+</body>
+</html>
