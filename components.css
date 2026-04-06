@@ -114,6 +114,11 @@ body.horizontal-layout {
     overflow-y: auto;
     background-color: var(--white);
     transition: transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.history .close-history {
+    display: none;
 }
 
 .history-header {
@@ -230,5 +235,9 @@ input[type="number"] {
 
     .history.active {
         transform: translateX(0);
+    }
+
+    .history .close-history {
+        display: block;
     }
 }
