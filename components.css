@@ -1,16 +1,23 @@
 /* ========================
-   WSPÓLNE KOMPONENTY
+   SYSTEM PROJEKTOWY - GLASSMORPHISM & NEON
    ======================== */
 
 /* Zmienne CSS */
 :root {
-    --primary: #3498db;
-    --bg: #f0f4f8;
-    --white: #ffffff;
-    --text-dark: #2c3e50;
-    --text-light: #7f8c8d;
-    --success: #e8f5e9;
-    --error: #ffebee;
+    --bg-color: #0f172a;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --pink-neon: #f472b6;
+    --blue-neon: #38bdf8;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --shadow-pink: 0 0 20px rgba(244, 114, 182, 0.3);
+    --shadow-blue: 0 0 20px rgba(56, 189, 248, 0.3);
+    --shadow-pink-strong: 0 0 30px rgba(244, 114, 182, 0.6);
+    --shadow-blue-strong: 0 0 30px rgba(56, 189, 248, 0.6);
+    --radius-lg: 24px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
 }
 
 /* Reset */
@@ -21,13 +28,16 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body.with-header {
-    padding-top: 60px;
+    padding-top: 70px;
 }
 
 body.horizontal-layout {
@@ -45,13 +55,16 @@ body.horizontal-layout {
     top: 0;
     left: 0;
     right: 0;
-    background: var(--white);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
     padding: 15px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     z-index: 100;
+    height: 70px;
 }
 
 .header-left {
@@ -61,15 +74,16 @@ body.horizontal-layout {
 }
 
 .header h1 {
-    color: var(--primary);
-    font-size: 1.2rem;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    font-weight: 600;
     margin: 0;
 }
 
 /* Przycisk back (chevron) */
 .btn-back {
     background: transparent;
-    color: var(--primary);
+    color: var(--blue-neon);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -77,17 +91,37 @@ body.horizontal-layout {
     font-size: 28px;
     font-weight: bold;
     padding: 8px;
+    border: 2px solid var(--blue-neon);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    width: 42px;
+    height: 42px;
 }
 
-/* Hamburger */
+.btn-back:hover {
+    background: var(--blue-neon);
+    color: var(--bg-color);
+    box-shadow: var(--shadow-blue-strong);
+}
+
+/* Hamburger menu */
 .hamburger {
     background: transparent;
-    color: var(--primary);
-    border: none;
+    color: var(--text-main);
+    border: 2px solid var(--glass-border);
     padding: 8px;
     cursor: pointer;
     font-size: 22px;
     display: none;
+    border-radius: var(--radius-sm);
+    width: 42px;
+    height: 42px;
+    transition: all 0.2s ease;
+}
+
+.hamburger:hover {
+    border-color: var(--pink-neon);
+    color: var(--pink-neon);
 }
 
 /* ========================
@@ -107,14 +141,15 @@ body.horizontal-layout {
    HISTORIA ZADAŃ
    ======================== */
 .history {
-    width: 300px;
+    width: 320px;
     height: 100%;
-    border-left: 2px solid #ddd;
-    padding: 10px 20px;
+    border-left: 1px solid var(--glass-border);
+    padding: 20px;
     overflow-y: auto;
-    background-color: var(--white);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     transition: transform 0.3s ease;
-
 }
 
 .history .close-history {
@@ -125,82 +160,179 @@ body.horizontal-layout {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .history-header h3 {
-    margin: 30px 0 15px 0;
-}
-
-@media (max-width: 768px) {
-    .history-header h3 {
-        margin: 0 0 15px 0;
-    }
+    margin: 0;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
 }
 
 .close-history {
     background: transparent;
-    color: var(--primary);
+    color: var(--text-muted);
     border: none;
     font-size: 28px;
     cursor: pointer;
     padding: 4px 10px;
+    transition: color 0.2s ease;
+}
+
+.close-history:hover {
+    color: var(--pink-neon);
 }
 
 .entry {
-    margin-bottom: 5px;
-    font-size: 14px;
-    padding: 8px;
-    border-radius: 4px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .entry.correct {
-    color: green;
-    background-color: var(--success);
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+    border-color: rgba(74, 222, 128, 0.2);
 }
 
 .entry.incorrect {
-    color: red;
-    background-color: var(--error);
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.1);
+    border-color: rgba(248, 113, 113, 0.2);
 }
 
 /* ========================
    PRZYCISKI
    ======================== */
 .btn-check {
-    padding: 12px 30px;
-    font-size: 18px;
-    margin-top: 15px;
+    padding: 14px 36px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 20px;
     cursor: pointer;
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
+    background: transparent;
+    color: var(--pink-neon);
+    border: 2px solid var(--pink-neon);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.btn-check:hover {
+    background: var(--pink-neon);
+    color: var(--bg-color);
+    box-shadow: var(--shadow-pink-strong);
+}
+
+.btn-neon-pink {
+    background: transparent;
+    border: 2px solid var(--pink-neon);
+    color: var(--pink-neon);
+    box-shadow: var(--shadow-pink);
+    transition: all 0.2s ease;
+}
+
+.btn-neon-pink:hover {
+    background: var(--pink-neon);
+    color: var(--bg-color);
+    box-shadow: var(--shadow-pink-strong);
+}
+
+.btn-neon-blue {
+    background: transparent;
+    border: 2px solid var(--blue-neon);
+    color: var(--blue-neon);
+    box-shadow: var(--shadow-blue);
+    transition: all 0.2s ease;
+}
+
+.btn-neon-blue:hover {
+    background: var(--blue-neon);
+    color: var(--bg-color);
+    box-shadow: var(--shadow-blue-strong);
 }
 
 /* ========================
    SELEKTOR TRYB
    ======================== */
 .mode-selector {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .mode-selector label {
-    margin-right: 15px;
+    margin-right: 0;
     cursor: pointer;
+    padding: 10px 20px;
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.mode-selector label:hover {
+    border-color: var(--blue-neon);
+    color: var(--blue-neon);
+}
+
+.mode-selector input[type="radio"] {
+    display: none;
+}
+
+.mode-selector input[type="radio"]:checked+label {
+    border-color: var(--blue-neon);
+    color: var(--blue-neon);
+    background: rgba(56, 189, 248, 0.1);
+    box-shadow: var(--shadow-blue);
 }
 
 /* ========================
    INPUTY
    ======================== */
-input[type="number"] {
-    padding: 12px;
-    font-size: 20px;
-    width: 120px;
+input[type="number"],
+input[type="tel"] {
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    width: 140px;
     text-align: center;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, sans-serif;
+    transition: all 0.2s ease;
+}
+
+input[type="number"]:focus,
+input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--blue-neon);
+    box-shadow: var(--shadow-blue);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input::-webkit-outer-spin-button,
@@ -213,13 +345,141 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+input::placeholder {
+    color: var(--text-muted);
+}
+
 /* ========================
-   TYP OGŁOSZENIA
+   TYP OGŁOSZENIA / FEEDBACK
    ======================== */
-#result {
-    margin-top: 15px;
-    font-size: 18px;
-    min-height: 24px;
+#result,
+#feedback {
+    margin-top: 20px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    min-height: 28px;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+}
+
+#result.success,
+#feedback.success {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+}
+
+#result.error,
+#feedback.error {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.1);
+}
+
+/* ========================
+   TABELA MATEMATYCZNA
+   ======================== */
+.math-table,
+.addition-table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.math-table td,
+.addition-table td {
+    width: var(--cell-size, 60px);
+    height: var(--cell-size, 60px);
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.75rem;
+    font-weight: 600;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.math-table td.no-border,
+.addition-table td.no-border {
+    border: none;
+    background: none;
+}
+
+/* Pola pomocnicze (carry) */
+.carry-row td {
+    height: 40px;
+    border: none !important;
+    vertical-align: bottom;
+}
+
+.carry-input {
+    width: 36px;
+    height: 30px;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 2px dashed var(--glass-border) !important;
+    border-radius: var(--radius-sm);
+    color: var(--pink-neon);
+    background-color: rgba(244, 114, 182, 0.1);
+    outline: none;
+    transition: all 0.2s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 10px 0;
+    min-height: 40px;
+}
+
+.carry-input:focus {
+    border-color: var(--pink-neon) !important;
+    box-shadow: var(--shadow-pink);
+}
+
+.line-row td {
+    border-bottom: 3px solid var(--blue-neon) !important;
+}
+
+/* Inputy wyniku */
+.result-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: bold;
+    background-color: rgba(56, 189, 248, 0.1);
+    color: var(--blue-neon);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 40px;
+    margin: 10px 0;
+}
+
+.result-input:focus {
+    background-color: rgba(56, 189, 248, 0.2);
+    outline: none;
+}
+
+.operator {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--pink-neon);
+}
+
+/* ========================
+   STATYSTYKI
+   ======================== */
+.stats {
+    margin-top: 16px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stats span {
+    color: var(--text-main);
+    font-weight: 600;
 }
 
 /* ========================
@@ -227,7 +487,9 @@ input[type="number"] {
    ======================== */
 @media (max-width: 768px) {
     .hamburger {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .history {
@@ -237,7 +499,7 @@ input[type="number"] {
         height: 100%;
         z-index: 1000;
         transform: translateX(100%);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
     .history.active {
@@ -247,4 +509,66 @@ input[type="number"] {
     .history .close-history {
         display: block;
     }
+
+    :root {
+        --cell-size: 50px;
+    }
+
+    input[type="number"],
+    input[type="tel"] {
+        width: 80px;
+        min-height: 60px;
+        font-size: 1.1rem;
+    }
+}
+
+/* ========================
+   GLASS CARD (universal)
+   ======================== */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================
+   DISPLAY / WYNIK
+   ======================== */
+.display-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* ========================
+   TASK DISPLAY
+   ======================== */
+#task {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 24px 0;
+    color: var(--text-main);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar styling */
+.history::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.history::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 3px;
+}
+
+.history::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
 }

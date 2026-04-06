@@ -1,105 +1,162 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dodawanie pod kreską do 1000</title>
   <link rel="stylesheet" href="components.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --cell-size: 55px;
+    .exercise-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 12px 8px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
-    body.with-header {
-      padding-top: 60px;
-    }
-    body.horizontal-layout {
+    .table-wrapper {
       display: flex;
-      flex-direction: row;
-      height: 100vh;
+      justify-content: center;
+    }
+
+    .math-table {
+      border-collapse: collapse;
+      table-layout: fixed;
+      margin: 12px 0;
+      width: 100%;
+      max-width: 260px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
       overflow: hidden;
     }
 
-    /* TABELA MATEMATYCZNA */
-    .addition-table {
-      border-collapse: collapse;
-      margin: 20px 0;
-      background: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .math-table colgroup col {
+      width: 40px;
     }
-    .addition-table td {
-      width: var(--cell-size);
-      height: var(--cell-size);
+
+    .math-table colgroup col:first-child {
+      width: 30px;
+    }
+
+    .math-table td {
+      height: 46px;
       text-align: center;
       vertical-align: middle;
-      font-size: 26px;
-      border: 1px solid #ccc;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.03);
     }
-    .addition-table td.no-border { border: none; background: none; }
 
-    /* POLA POMOCNICZE */
+    .math-table td.no-border {
+      border: none;
+      background: none;
+    }
+
     .carry-row td {
-      height: 35px;
+      height: 28px;
       border: none !important;
       vertical-align: bottom;
     }
+
     .carry-input {
-      width: 30px;
-      height: 25px;
+      width: 28px;
+      height: 24px;
       text-align: center;
-      font-size: 14px;
-      border: 1px dashed #999 !important;
-      border-radius: 3px;
-      color: #666;
-      background-color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      border: 1px dashed var(--glass-border) !important;
+      border-radius: 4px;
+      color: var(--pink-neon);
+      background-color: rgba(244, 114, 182, 0.1);
       outline: none;
-      display: inline-block;
+      transition: all 0.2s ease;
+      font-family: 'Inter', system-ui, sans-serif;
+      margin-bottom: 10px;
     }
 
-    .line-row td { border-bottom: 3px solid #333; }
+    .carry-input:focus {
+      border-color: var(--pink-neon) !important;
+      box-shadow: var(--shadow-pink);
+    }
 
-    /* INPUTY WYNIKU */
-    input[type=tel] {
-      -moz-appearance: textfield;
-      outline: none;
-      border: none;
+    .line-row td {
+      border-bottom: 2px solid var(--blue-neon) !important;
     }
 
     .result-input {
-      width: 100%;
-      height: 100%;
+      width: 32px;
+      height: 36px;
+      border: none;
       text-align: center;
-      font-size: 26px;
+      font-size: 1.1rem;
       font-weight: bold;
-      background-color: #eef6ff;
+      background-color: rgba(56, 189, 248, 0.1);
+      color: var(--blue-neon);
+      font-family: 'Inter', system-ui, sans-serif;
+      box-sizing: border-box;
     }
 
-    .operator { font-size: 30px; font-weight: bold; }
+    .result-input:focus {
+      background-color: rgba(56, 189, 248, 0.2);
+      outline: none;
+    }
 
-    .btn-check {
-      padding: 12px 30px;
-      font-size: 18px;
-      margin-top: 15px;
-      cursor: pointer;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      width: 200px;
+    .operator {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--pink-neon);
     }
 
     #feedback {
-      margin-top: 15px;
-      font-weight: bold;
-      font-size: 18px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
       min-height: 24px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
     }
 
-    @media (max-width: 768px) {
-      :root { --cell-size: 45px; }
+    #feedback.success {
+      color: #4ade80;
+      background: rgba(74, 222, 128, 0.15);
+    }
+
+    #feedback.error {
+      color: #f87171;
+      background: rgba(248, 113, 113, 0.15);
+    }
+
+    .stats {
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stats span {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .stats .correct-count {
+      color: #4ade80;
+    }
+
+    .stats .incorrect-count {
+      color: #f87171;
     }
   </style>
 </head>
+
 <body class="with-header horizontal-layout">
   <div class="header">
     <div class="header-left">
@@ -110,36 +167,49 @@
   </div>
 
   <div class="main">
-    <table class="addition-table">
-      <tr class="carry-row">
-        <td class="no-border"><input type="tel" class="carry-input" id="c4" maxlength="1"></td>
-        <td class="no-border"><input type="tel" class="carry-input" id="c3" maxlength="1"></td>
-        <td class="no-border"><input type="tel" class="carry-input" id="c2" maxlength="1"></td>
-        <td class="no-border"></td>
-      </tr>
-      <tr>
-        <td class="no-border"></td>
-        <td id="n1-h">0</td>
-        <td id="n1-t">0</td>
-        <td id="n1-u">0</td>
-      </tr>
-      <tr class="line-row">
-        <td class="no-border operator">+</td>
-        <td id="n2-h">0</td>
-        <td id="n2-t">0</td>
-        <td id="n2-u">0</td>
-      </tr>
-      <tr>
-        <td><input type="tel" class="result-input" id="res-1" maxlength="1"></td>
-        <td><input type="tel" class="result-input" id="res-2" maxlength="1"></td>
-        <td><input type="tel" class="result-input" id="res-3" maxlength="1"></td>
-        <td><input type="tel" class="result-input" id="res-4" maxlength="1"></td>
-      </tr>
-    </table>
+    <div class="exercise-container">
+      <div class="table-wrapper">
+        <table class="math-table">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+          <tr class="carry-row">
+            <td class="no-border"><input type="tel" class="carry-input" id="c4" maxlength="1"></td>
+            <td class="no-border"><input type="tel" class="carry-input" id="c3" maxlength="1"></td>
+            <td class="no-border"><input type="tel" class="carry-input" id="c2" maxlength="1"></td>
+            <td class="no-border"></td>
+          </tr>
+          <tr>
+            <td class="no-border"></td>
+            <td id="n1-h">0</td>
+            <td id="n1-t">0</td>
+            <td id="n1-u">0</td>
+          </tr>
+          <tr class="line-row">
+            <td class="no-border operator">+</td>
+            <td id="n2-h">0</td>
+            <td id="n2-t">0</td>
+            <td id="n2-u">0</td>
+          </tr>
+          <tr>
+            <td><input type="tel" class="result-input" id="res-1" maxlength="1"></td>
+            <td><input type="tel" class="result-input" id="res-2" maxlength="1"></td>
+            <td><input type="tel" class="result-input" id="res-3" maxlength="1"></td>
+            <td><input type="tel" class="result-input" id="res-4" maxlength="1"></td>
+          </tr>
+        </table>
+      </div>
 
-    <div id="feedback"></div>
-    <button class="btn-check" onclick="checkAnswer()">Sprawdź</button>
-    <p>Poprawne: <span id="correct-count">0</span> | Błędne: <span id="incorrect-count">0</span></p>
+      <div id="feedback"></div>
+      <button class="btn-check" onclick="checkAnswer()">Sprawdź</button>
+      <div class="stats">
+        Poprawne: <span class="correct-count" id="correct-count">0</span> | Błędne: <span class="incorrect-count"
+          id="incorrect-count">0</span>
+      </div>
+    </div>
   </div>
 
   <div class="history" id="historyPanel">
@@ -160,7 +230,7 @@
 
     inputOrder.forEach((id, index) => {
       const el = document.getElementById(id);
-      el.addEventListener('input', function() {
+      el.addEventListener('input', function () {
         if (this.value.length === 1 && index < inputOrder.length - 1) {
           document.getElementById(inputOrder[index + 1]).focus();
         }
@@ -191,6 +261,7 @@
 
       document.querySelectorAll('input').forEach(i => i.value = '');
       document.getElementById('feedback').innerText = '';
+      document.getElementById('feedback').className = '';
       document.getElementById('historyPanel').classList.remove('active');
       document.getElementById('res-4').focus();
     }
@@ -207,21 +278,24 @@
       const isCorrect = userVal === totalSum;
       const log = document.getElementById('historyLog');
       const entry = document.createElement('div');
+      const feedback = document.getElementById('feedback');
 
       if (isCorrect) {
-        document.getElementById('feedback').innerHTML = "<span style='color:green'>Dobrze!</span>";
+        feedback.innerHTML = "Dobrze!";
+        feedback.className = "success";
         scoreCorrect++;
         entry.className = "entry correct";
-        entry.innerText = `#${taskNumber}: ${val1}+${val2}=${userVal} ✅`;
+        entry.innerText = `#${taskNumber}: ${val1}+${val2}=${userVal} ✓`;
         document.getElementById('correct-count').innerText = scoreCorrect;
         log.prepend(entry);
         taskNumber++;
         setTimeout(generateTask, 1500);
       } else {
-        document.getElementById('feedback').innerHTML = "<span style='color:red'>Błąd! Spróbuj poprawić.</span>";
+        feedback.innerHTML = "Błąd! Spróbuj poprawić.";
+        feedback.className = "error";
         scoreIncorrect++;
         entry.className = "entry incorrect";
-        entry.innerText = `#${taskNumber}: ${val1}+${val2}=${userString || '?'} ❌`;
+        entry.innerText = `#${taskNumber}: ${val1}+${val2}=${userString || '?'} ✗`;
         document.getElementById('incorrect-count').innerText = scoreIncorrect;
         log.prepend(entry);
         document.getElementById('res-4').focus();
@@ -235,4 +309,5 @@
     window.onload = generateTask;
   </script>
 </body>
+
 </html>
