@@ -40,22 +40,23 @@
     }
 
     .btn-back {
-      background: var(--primary);
-      color: white;
+      background: transparent;
+      color: var(--primary);
       text-decoration: none;
       padding: 8px 16px;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 18px;
+      font-weight: bold;
     }
 
     .hamburger {
       background: var(--primary);
       color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 8px;
+      border: 2px solid white;
+      padding: 8px 10px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 18px;
       display: none;
     }
 
@@ -201,7 +202,7 @@
 <body>
   <div class="header">
     <div class="header-left">
-      <a href="index.html" class="btn-back">← Menu</a>
+      <a href="index.html" class="btn-back">←</a>
       <h1>Odejmowanie pod kreską</h1>
     </div>
     <button class="hamburger" onclick="toggleHistory()">☰</button>
