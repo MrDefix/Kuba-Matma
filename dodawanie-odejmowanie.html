@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dodawanie i Odejmowanie (0–100)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+    .main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+    }
+    .history {
+      width: 40%;
+      max-width: 300px;
+      border-left: 2px solid #ddd;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+    }
+    h1 { color: #2a7ae2; }
+    #task { font-size: 24px; margin: 20px 0; }
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 80px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .correct { color: green; }
+    .incorrect { color: red; }
+    .entry {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    .mode-selector, .difficulty-selector {
+      margin-bottom: 10px;
+    }
+    .mode-selector label, .difficulty-selector label {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <h1>Ćwiczenie: Dodawanie i Odejmowanie (0–100)</h1>
+
+    <div class="mode-selector">
+      <label><input type="radio" name="mode" value="mixed" checked onchange="setMode(this.value)"> Mieszane</label>
+      <label><input type="radio" name="mode" value="add" onchange="setMode(this.value)"> Tylko dodawanie</label>
+      <label><input type="radio" name="mode" value="sub" onchange="setMode(this.value)"> Tylko odejmowanie</label>
+    </div>
+
+    <div id="task">Ładowanie zadania...</div>
+    <input type="number" id="answer" placeholder="Odpowiedź" />
+    <br />
+    <button onclick="checkAnswer()">Sprawdź</button>
+    <div id="result"></div>
+    <p>Poprawne: <span id="correct">0</span> | Błędne: <span id="incorrect">0</span></p>
+  </div>
+
+  <div class="history">
+    <h3>Historia zadań</h3>
+    <div id="historyLog"></div>
+  </div>
+
+  <script>
+    let a, b, op, correctAnswer;
+    let correct = 0;
+    let incorrect = 0;
+    let mode = "mixed";
+    let taskNumber = 1;
+
+    function setMode(newMode) {
+      mode = newMode;
+      generateTask();
+    }
+
+    function isUnwantedResult(result) {
+      const forbidden = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+      return forbidden.includes(result);
+    }
+
+    function generateTask() {
+      do {
+        if (mode === "add") {
+          op = '+';
+          a = Math.floor(Math.random() * 101);
+          b = Math.floor(Math.random() * (101 - a)); // b < 101 - a
+          if (a === 0 || b === 0) continue; // Unikamy dodawania 0
+          correctAnswer = a + b;
+        } else if (mode === "sub") {
+          op = '-';
+          a = Math.floor(Math.random() * 101); // Losujemy pierwszą liczbę
+          b = Math.floor(Math.random() * a);  // Losujemy drugą liczbę mniejszą od a
+          if (a === 0 || b === 0 || b === a) continue; // Unikamy odejmowania 0 oraz a - a
+          correctAnswer = a - b;
+        } else {
+          op = Math.random() < 0.5 ? '+' : '-';
+          if (op === '+') {
+            a = Math.floor(Math.random() * 101);
+            b = Math.floor(Math.random() * (101 - a));
+            if (a === 0 || b === 0) continue; // Unikamy dodawania 0
+            correctAnswer = a + b;
+          } else {
+            a = Math.floor(Math.random() * 101); 
+            b = Math.floor(Math.random() * a); // b < a
+            if (a === 0 || b === 0 || b === a) continue; // Unikamy odejmowania 0 oraz a - a
+            correctAnswer = a - b;
+          }
+        }
+      } while (isUnwantedResult(correctAnswer)); // Sprawdzanie, czy wynik nie jest zabroniony
+
+      document.getElementById("task").innerText = `Ile to jest: ${a} ${op} ${b}?`;
+      document.getElementById("answer").value = '';
+      document.getElementById("result").innerText = '';
+      document.getElementById("answer").focus();
+    }
+
+    function checkAnswer() {
+      const userAnswer = parseInt(document.getElementById("answer").value, 10);
+
+      if (isNaN(userAnswer)) {
+        document.getElementById("result").innerText = "Wpisz poprawną liczbę.";
+        return;
+      }
+
+      const aNow = a;
+      const bNow = b;
+      const opNow = op;
+      const correctAnswerNow = correctAnswer;
+
+      const isCorrect = userAnswer === correctAnswerNow;
+
+      if (isCorrect) {
+        document.getElementById("result").innerText = "Dobrze!";
+        correct++;
+      } else {
+        document.getElementById("result").innerText = "Niestety, to niepoprawna odpowiedź.";
+        incorrect++;
+      }
+
+      document.getElementById("correct").innerText = correct;
+      document.getElementById("incorrect").innerText = incorrect;
+
+      const history = document.getElementById("historyLog");
+      const entry = document.createElement("div");
+      entry.className = "entry " + (isCorrect ? "correct" : "incorrect");
+      const symbol = isCorrect ? '✅' : '❌';
+      entry.textContent = `${taskNumber}. ${aNow} ${opNow} ${bNow} = ${userAnswer} ${symbol}`;
+      history.prepend(entry);
+
+      taskNumber++;
+      generateTask();
+    }
+
+    document.getElementById("answer").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        checkAnswer();
+      }
+    });
+
+    generateTask();
+  </script>
+</body>
+</html>

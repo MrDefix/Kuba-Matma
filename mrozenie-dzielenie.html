@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mnożenie i Dzielenie (0–100)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      margin: 0;
+    }
+    .main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+    }
+    .history {
+      width: 40%;
+      max-width: 300px;
+      border-left: 2px solid #ccc;
+      padding: 10px;
+      overflow-y: auto;
+      background: #f0f0f0;
+    }
+    h1 { color: #337ab7; }
+    #task { font-size: 24px; margin: 20px 0; }
+    input[type="number"] {
+      padding: 10px;
+      font-size: 18px;
+      width: 100px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .mode-selector {
+      margin-bottom: 15px;
+    }
+    .entry {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .correct { color: green; }
+    .incorrect { color: red; }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <h1>Mnożenie i Dzielenie (0–100)</h1>
+
+    <div class="mode-selector">
+      <label><input type="radio" name="mode" value="mixed" checked onchange="setMode(this.value)"> Mieszane</label>
+      <label><input type="radio" name="mode" value="mul" onchange="setMode(this.value)"> Mnożenie</label>
+      <label><input type="radio" name="mode" value="div" onchange="setMode(this.value)"> Dzielenie</label>
+    </div>
+
+    <div id="task">Ładowanie zadania...</div>
+    <input type="number" id="answer" placeholder="Odpowiedź">
+    <br>
+    <button onclick="checkAnswer()">Sprawdź</button>
+    <div id="result"></div>
+    <p>Poprawne: <span id="correct">0</span> | Błędne: <span id="incorrect">0</span></p>
+  </div>
+
+  <div class="history">
+    <h3>Historia zadań</h3>
+    <div id="historyLog"></div>
+  </div>
+
+  <script>
+  let a, b, op, correctAnswer;
+  let correct = 0;
+  let incorrect = 0;
+  let mode = "mixed";
+  let taskNumber = 1;
+
+  function isUnwantedResult(result) {
+    const forbidden = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    return forbidden.includes(result);
+  }
+
+  function setMode(newMode) {
+    mode = newMode;
+    generateTask();
+  }
+
+  function generateTask() {
+    do {
+      if (mode === "mul" || (mode === "mixed" && Math.random() < 0.5)) {
+        op = '×';
+        a = Math.floor(Math.random() * 9) + 2; // 2–10
+        b = Math.floor(Math.random() * 9) + 2; // 2–10
+        correctAnswer = a * b;
+      } else {
+        op = '÷';
+        b = Math.floor(Math.random() * 9) + 2; // dzielnik 2–10
+        correctAnswer = Math.floor(Math.random() * 9) + 2; // wynik 2–10
+        a = b * correctAnswer;
+      }
+    } while (isUnwantedResult(correctAnswer));
+
+    document.getElementById("task").innerText = `Ile to jest: ${a} ${op} ${b}?`;
+    document.getElementById("answer").value = '';
+    document.getElementById("result").innerText = '';
+    document.getElementById("answer").focus();
+  }
+
+  function checkAnswer() {
+    const userAnswer = parseInt(document.getElementById("answer").value, 10);
+    if (isNaN(userAnswer)) {
+      document.getElementById("result").innerText = "Wpisz poprawną liczbę.";
+      return;
+    }
+
+    const isCorrect = userAnswer === correctAnswer;
+    const history = document.getElementById("historyLog");
+    const entry = document.createElement("div");
+    entry.className = "entry " + (isCorrect ? "correct" : "incorrect");
+    const symbol = isCorrect ? '✅' : '❌';
+
+    entry.textContent = `${taskNumber}. ${a} ${op} ${b} = ${userAnswer} ${symbol}`;
+    history.prepend(entry);
+
+    if (isCorrect) {
+      document.getElementById("result").innerText = "Dobrze!";
+      correct++;
+    } else {
+      document.getElementById("result").innerText = "Niestety, to niepoprawna odpowiedź.";
+      incorrect++;
+    }
+
+    document.getElementById("correct").innerText = correct;
+    document.getElementById("incorrect").innerText = incorrect;
+
+    taskNumber++;
+    generateTask();
+  }
+
+  document.getElementById("answer").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      checkAnswer();
+    }
+  });
+
+  generateTask();
+</script>
+
+</body>
+</html>

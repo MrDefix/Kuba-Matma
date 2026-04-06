@@ -27,6 +27,12 @@
       z-index: 100;
     }
 
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .header h1 {
       color: var(--primary);
       font-size: 1.2rem;
@@ -40,6 +46,17 @@
       padding: 8px 16px;
       border-radius: 8px;
       font-size: 14px;
+    }
+
+    .hamburger {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      display: none;
     }
 
     body {
@@ -64,19 +81,19 @@
       justify-content: center;
     }
 
-    .hamburger {
-      display: none;
-      position: fixed;
-      top: 70px;
-      right: 15px;
-      z-index: 1001;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 20px;
+    @media (max-width: 768px) {
+      :root { --cell-size: 45px; }
+      .hamburger { display: block; }
+      .history {
+        position: fixed;
+        right: 0;
+        top: 60px;
+        height: calc(100% - 60px);
+        z-index: 1000;
+        transform: translateX(100%);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+      }
+      .history.active { transform: translateX(0); }
     }
 
     /* HISTORIA */
@@ -183,11 +200,12 @@
 </head>
 <body>
   <div class="header">
-    <h1>Dodawanie pod kreską</h1>
-    <a href="index.html" class="btn-back">← Menu</a>
+    <div class="header-left">
+      <a href="index.html" class="btn-back">← Menu</a>
+      <h1>Dodawanie pod kreską</h1>
+    </div>
+    <button class="hamburger" onclick="toggleHistory()">☰</button>
   </div>
-
-  <button class="hamburger" onclick="toggleHistory()">☰</button>
 
   <div class="main">
     <div id="feedback"></div>
