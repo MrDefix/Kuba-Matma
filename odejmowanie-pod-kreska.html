@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Odejmowanie pod kreską do 1000</title>
   <link rel="stylesheet" href="components.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -66,10 +67,10 @@
     }
 
     .carry-input {
-      width: 28px;
-      height: 24px;
+      width: 40px;
+      height: 40px;
       text-align: center;
-      font-size: 0.7rem;
+      font-size: 1rem;
       font-weight: 600;
       border: 1px dashed var(--glass-border) !important;
       border-radius: 4px;
@@ -91,16 +92,20 @@
     }
 
     .result-input {
-      width: 32px;
-      height: 36px;
-      border: none;
+      width: 40px;
+      height: 40px;
       text-align: center;
-      font-size: 1.1rem;
-      font-weight: bold;
-      background-color: rgba(56, 189, 248, 0.1);
-      color: var(--blue-neon);
+      border: 2px solid var(--glass-border);
+      border-radius: 4px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--text-main);
       font-family: 'Inter', system-ui, sans-serif;
-      box-sizing: border-box;
+      transition: all 0.2s ease;
+      border: 2px solid var(--blue-neon);
+      margin: 10px 0;
+      font-size: 20px
     }
 
     .result-input:focus {
@@ -155,6 +160,7 @@
     }
   </style>
 </head>
+
 <body class="with-header horizontal-layout">
   <div class="header">
     <div class="header-left">
@@ -204,7 +210,8 @@
       <div id="feedback"></div>
       <button class="btn-check" onclick="checkAnswer()">Sprawdź</button>
       <div class="stats">
-        Poprawne: <span class="correct-count" id="correct-count">0</span> | Błędne: <span class="incorrect-count" id="incorrect-count">0</span>
+        Poprawne: <span class="correct-count" id="correct-count">0</span> | Błędne: <span class="incorrect-count"
+          id="incorrect-count">0</span>
       </div>
     </div>
   </div>
@@ -227,7 +234,7 @@
 
     inputOrder.forEach((id, index) => {
       const el = document.getElementById(id);
-      el.addEventListener('input', function() {
+      el.addEventListener('input', function () {
         if (this.value.length === 1 && index < inputOrder.length - 1) {
           document.getElementById(inputOrder[index + 1]).focus();
         }
@@ -304,4 +311,5 @@
     window.onload = generateTask;
   </script>
 </body>
+
 </html>
