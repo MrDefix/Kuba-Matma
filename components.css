@@ -226,7 +226,7 @@ input[type="number"] {
     .history {
         position: fixed;
         right: 0;
-        top: 10px;
+        top: 0;
         height: 100%;
         z-index: 1000;
         transform: translateX(100%);
