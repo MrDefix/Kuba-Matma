@@ -137,7 +137,7 @@ main {
 /* ========================
    RESPONSIVE
    ======================== */
-@media (max-width: 400px) {
+@media (max-width: 350px) {
     main {
         grid-template-columns: 1fr;
     }
