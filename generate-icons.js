@@ -27,13 +27,14 @@ function drawIcon(size, filename) {
   ctx.roundRect(size * 0.08, size * 0.08, size * 0.84, size * 0.84, size * 0.12);
   ctx.stroke();
 
-  // Math symbol "+" and "−" in center
+  // Math symbols "+−" top and "×÷" bottom
   ctx.shadowBlur = 0;
   ctx.fillStyle = '#f8fafc';
-  ctx.font = `bold ${size * 0.5}px Arial`;
+  ctx.font = `bold ${size * 0.35}px Arial`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('+−', size / 2, size / 2);
+  ctx.fillText('+−', size / 2, size * 0.38);
+  ctx.fillText('×÷', size / 2, size * 0.62);
 
   const buffer = canvas.toBuffer('image/png');
   fs.writeFileSync(filename, buffer);
