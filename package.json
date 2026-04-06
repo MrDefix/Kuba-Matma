@@ -1,0 +1,24 @@
+{
+  "name": "matma-kuba",
+  "version": "1.0.0",
+  "description": "Projekt matematyczny",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrDefix/Kuba-Matma.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MrDefix/Kuba-Matma/issues"
+  },
+  "homepage": "https://github.com/MrDefix/Kuba-Matma#readme",
+  "dependencies": {
+    "canvas": "^3.2.3"
+  }
+}

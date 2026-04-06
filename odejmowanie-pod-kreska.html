@@ -5,6 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Odejmowanie pod kreską do 1000</title>
+  <meta name="description" content="Zestaw ćwiczeń z matematyki dla dzieci - odejmowanie pod kreską">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="components.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -309,6 +315,15 @@
     });
 
     window.onload = generateTask;
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').then(function() {
+        console.log('Service Worker zarejestrowany');
+      }).catch(function(err) {
+        console.log('Rejestracja SW nie powiodła się:', err);
+      });
+    }
   </script>
 </body>
 
