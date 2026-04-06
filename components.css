@@ -50,7 +50,7 @@ body.horizontal-layout {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     z-index: 100;
 }
 
@@ -110,11 +110,11 @@ body.horizontal-layout {
     width: 300px;
     height: 100%;
     border-left: 2px solid #ddd;
-    padding: 20px;
+    padding: 10px 20px;
     overflow-y: auto;
     background-color: var(--white);
     transition: transform 0.3s ease;
-    margin-top: 10px;
+
 }
 
 .history .close-history {
@@ -129,7 +129,13 @@ body.horizontal-layout {
 }
 
 .history-header h3 {
-    margin: 0;
+    margin: 30px 0 15px 0;
+}
+
+@media (max-width: 768px) {
+    .history-header h3 {
+        margin: 0 0 15px 0;
+    }
 }
 
 .close-history {
@@ -202,6 +208,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type="number"] {
     -moz-appearance: textfield;
 }
@@ -230,7 +237,7 @@ input[type="number"] {
         height: 100%;
         z-index: 1000;
         transform: translateX(100%);
-        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
     }
 
     .history.active {
