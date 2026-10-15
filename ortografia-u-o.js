@@ -13,6 +13,11 @@ const quiz = UOQuiz.createPractice();
 
 function render() {
     const wrong = quiz.phase === 'explanation';
+    form.hidden = wrong;
+    status.hidden = wrong;
+    document.getElementById('quiz-card').classList.toggle('showing-explanation', wrong);
+    status.classList.toggle('is-error', wrong);
+    form.classList.toggle('has-error', wrong);
     explanation.hidden = !wrong;
     document.getElementById('correct-count').textContent = String(quiz.correct);
     document.getElementById('incorrect-count').textContent = String(quiz.incorrect);
@@ -48,7 +53,7 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     const result = quiz.submit();
     if (!result) return;
-    status.textContent = result === 'correct' ? 'Dobrze!' : 'Tym razem się nie udało. Przeczytaj zasadę.';
+    status.textContent = result === 'correct' ? 'Dobrze!' : '✕ Błędna odpowiedź. Przeczytaj zasadę.';
     render();
     if (result === 'correct' && quiz.phase === 'question') question.focus();
 });
@@ -69,6 +74,7 @@ showMistakes.addEventListener('click', () => {
         const word = document.createElement('strong');
         word.textContent = mistake.word;
         const answer = document.createElement('p');
+        answer.className = 'mistake-answer';
         answer.textContent = `Twój wybór: „${mistake.picked}”. Poprawnie: „${mistake.answer}”.`;
         const rule = document.createElement('p');
         rule.textContent = mistake.rule;

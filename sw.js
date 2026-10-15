@@ -1,4 +1,4 @@
-const CACHE_NAME = 'matma-kuba-v7';
+const CACHE_NAME = 'matma-kuba-v9';
 const urlsToCache = [
   '/',
   '/index.html',

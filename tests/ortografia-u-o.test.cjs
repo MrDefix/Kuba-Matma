@@ -168,6 +168,8 @@ test('błąd pokazuje zasadę, Dalej zachowuje liczniki i ćwiczenie nie kończy
     choices[0].click();
     submit();
     assert.equal(elements.explanation.hidden, false);
+    assert.equal(elements['quiz-form'].hidden, true);
+    assert.equal(elements.status.hidden, true);
     assert.equal(elements.rule.textContent, 'stół – stoły');
     assert.equal(elements['word-gap'].textContent, 'ó');
     assert.equal(elements.correction.textContent, 'Poprawna pisownia: stół.');
@@ -175,6 +177,8 @@ test('błąd pokazuje zasadę, Dalej zachowuje liczniki i ćwiczenie nie kończy
     assert.ok(choices.every(choice => choice.disabled));
     elements['next-question'].click();
     assert.equal(elements.explanation.hidden, true);
+    assert.equal(elements['quiz-form'].hidden, false);
+    assert.equal(elements.status.hidden, false);
     choices[0].click();
     submit();
     assert.equal(elements['correct-count'].textContent, '1');

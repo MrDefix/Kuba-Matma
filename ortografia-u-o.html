@@ -22,7 +22,7 @@
         <p>Uzupełnij słowo. Wybierz „u” lub „ó” i zatwierdź.</p>
         <a href="ortografia.html" class="subject-back">‹ Ortografia</a>
     </header>
-    <main class="spelling-quiz">
+    <main id="quiz-card" class="spelling-quiz">
         <p id="status" class="quiz-status" role="status" aria-live="polite"></p>
         <form id="quiz-form">
             <h2 id="question" class="quiz-word" tabindex="-1">
@@ -38,7 +38,7 @@
             <button id="submit-answer" class="quiz-button" type="submit" disabled>Zatwierdź</button>
         </form>
         <section id="explanation" class="quiz-explanation" aria-labelledby="explanation-title" tabindex="-1" hidden>
-            <h2 id="explanation-title">Przeczytaj i zapamiętaj</h2>
+            <h2 id="explanation-title">✕ Błędna odpowiedź</h2>
             <p id="correction"></p>
             <p id="rule"></p>
             <button id="next-question" class="quiz-button" type="button">Dalej</button>
