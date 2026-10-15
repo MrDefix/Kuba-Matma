@@ -88,7 +88,7 @@ test('każdy błąd jest liczony raz i zachowuje wybraną literę, poprawne sło
 });
 
 test('baza zawiera unikalne słowa, obie litery i zasady dla każdego zadania', () => {
-    assert.ok(words.length >= 40);
+    assert.equal(words.length, 300);
     const spelling = words.map(word => word.before + word.answer + word.after);
     assert.equal(new Set(spelling).size, words.length);
     assert.deepEqual([...new Set(words.map(word => word.answer))].sort(), ['u', 'ó']);
@@ -96,6 +96,31 @@ test('baza zawiera unikalne słowa, obie litery i zasady dla każdego zadania', 
         assert.ok(word.rule.length > 20);
         assert.equal(typeof word.before, 'string');
         assert.equal(typeof word.after, 'string');
+        assert.ok(!word.before.includes('_') && !word.after.includes('_'));
+        assert.equal(typeof word.category, 'string');
+    }
+});
+
+test('300 wyrazów ma dokładnie podany rozkład głównych kategorii', () => {
+    const counts = {};
+    for (const word of words) counts[word.category] = (counts[word.category] || 0) + 1;
+    assert.deepEqual(counts, {
+        'Ó wymienne na O': 40,
+        'Ó wymienne na E': 20,
+        'Ó wymienne na A': 10,
+        'Ó w zakończeniach -ów, -ówka, -ówna': 35,
+        'Ó na początku wyrazu': 10,
+        'Ó niewymienne – do zapamiętania': 45,
+        'U w zakończeniach czasowników': 35,
+        'U w zakończeniach rzeczowników': 30,
+        'U na początku wyrazu': 25,
+        'U niewymienne – do zapamiętania': 40,
+        'Wyjątki i pułapki': 10
+    });
+    for (const word of words) {
+        if (word.category.startsWith('Ó')) assert.equal(word.answer, 'ó');
+        if (word.category.startsWith('U')) assert.equal(word.answer, 'u');
+        if (word.category.includes('na początku')) assert.equal(word.before, '');
     }
 });
 
