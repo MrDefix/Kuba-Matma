@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pisownia u i ó – Kuba uczy się!</title>
+    <meta name="description" content="Ćwiczenia ortograficzne z pisowni u i ó dla dzieci">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ortografia-u-o.css">
+    <script src="ortografia-u-o-quiz.js" defer></script>
+    <script src="ortografia-u-o.js" defer></script>
+</head>
+
+<body class="spelling-page">
+    <header>
+        <h1>Pisownia u i ó</h1>
+        <p>Uzupełnij słowo. Wybierz „u” lub „ó” i zatwierdź.</p>
+        <a href="ortografia.html" class="subject-back">‹ Ortografia</a>
+    </header>
+    <main class="spelling-quiz">
+        <p id="status" class="quiz-status" role="status" aria-live="polite"></p>
+        <form id="quiz-form">
+            <h2 id="question" class="quiz-word" tabindex="-1">
+                <span id="word-before"></span><span id="word-gap" class="word-gap">?</span><span id="word-after"></span>
+            </h2>
+            <fieldset id="choices">
+                <legend>Wybierz brakującą literę</legend>
+                <div class="letter-choices">
+                    <button type="button" class="letter-choice" data-letter="u" aria-pressed="false">u</button>
+                    <button type="button" class="letter-choice" data-letter="ó" aria-pressed="false">ó</button>
+                </div>
+            </fieldset>
+            <button id="submit-answer" class="quiz-button" type="submit" disabled>Zatwierdź</button>
+        </form>
+        <section id="explanation" class="quiz-explanation" aria-labelledby="explanation-title" tabindex="-1" hidden>
+            <h2 id="explanation-title">Przeczytaj i zapamiętaj</h2>
+            <p id="correction"></p>
+            <p id="rule"></p>
+            <button id="next-question" class="quiz-button" type="button">Dalej</button>
+        </section>
+        <noscript>Włącz JavaScript, aby rozwiązywać ćwiczenia.</noscript>
+    </main>
+    <footer class="answer-counters" aria-label="Wyniki ćwiczeń">
+        <div class="answer-counter correct-counter">
+            <span>Poprawne</span>
+            <output id="correct-count" aria-live="polite">0</output>
+        </div>
+        <button id="show-mistakes" class="answer-counter incorrect-counter" type="button"
+            aria-haspopup="dialog" aria-controls="mistakes-sheet" aria-expanded="false">
+            <span>Błędy <span aria-hidden="true">↑</span></span>
+            <span id="incorrect-count" aria-live="polite">0</span>
+        </button>
+    </footer>
+    <dialog id="mistakes-sheet" class="mistakes-sheet" aria-labelledby="mistakes-title">
+        <div class="mistakes-heading">
+            <h2 id="mistakes-title">Twoje błędy</h2>
+            <button id="close-mistakes" class="sheet-close" type="button" aria-label="Zamknij listę błędów">×</button>
+        </div>
+        <div class="mistakes-content">
+            <p id="mistakes-empty">Nie masz jeszcze błędów.</p>
+            <ol id="mistakes-list"></ol>
+        </div>
+    </dialog>
+</body>
+
+</html>

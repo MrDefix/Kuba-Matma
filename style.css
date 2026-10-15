@@ -39,6 +39,19 @@ header p {
     font-weight: 400;
 }
 
+.subject-back {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 12px 8px;
+    color: var(--blue-neon);
+}
+
+.subject-back:focus-visible,
+.tile:focus-visible {
+    outline: 2px solid var(--blue-neon);
+    outline-offset: 4px;
+}
+
 /* ========================
    Kafelki ćwiczeń
    ======================== */

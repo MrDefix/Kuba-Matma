@@ -1,7 +1,16 @@
-const CACHE_NAME = 'matma-kuba-v1';
+const CACHE_NAME = 'matma-kuba-v7';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/matematyka.html',
+  '/polski.html',
+  '/ortografia.html',
+  '/ortografia-u-o.html',
+  '/ortografia-u-o-quiz.js',
+  '/ortografia-u-o.js',
+  '/ortografia-u-o.css',
+  '/ortografia-rz-z.html',
+  '/ortografia-h-ch.html',
   '/dodawanie-100.html',
   '/mnozenie-dzielenie.html',
   '/dodawanie-pod-kreska.html',
