@@ -1,7 +1,10 @@
 'use strict';
 
 const lineQuiz = typeof NumberLineQuiz !== 'undefined' ? NumberLineQuiz : null;
-const quizSource = typeof MemoryMathQuiz !== 'undefined' ? MemoryMathQuiz : (lineQuiz || NumberQuiz);
+const quizSource = typeof SmartSubtractionQuiz !== 'undefined' ? SmartSubtractionQuiz
+    : typeof SmartAdditionQuiz !== 'undefined' ? SmartAdditionQuiz
+    : typeof EstimationQuiz !== 'undefined' ? EstimationQuiz
+    : typeof MemoryMathQuiz !== 'undefined' ? MemoryMathQuiz : (lineQuiz || NumberQuiz);
 const quiz = quizSource.createQuiz();
 const byId = id => document.getElementById(id);
 const form = byId('quiz-form');

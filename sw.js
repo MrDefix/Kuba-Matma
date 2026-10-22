@@ -1,4 +1,4 @@
-const CACHE_NAME = 'matma-kuba-v17';
+const CACHE_NAME = 'matma-kuba-v20';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -15,8 +15,11 @@ const urlsToCache = [
   '/dzial-2-dodawanie-odejmowanie-w-pamieci.html',
   '/pamiec-quiz.js',
   '/dzial-2-szacowanie.html',
+  '/szacowanie-quiz.js',
   '/dzial-2-sprytne-dodawanie.html',
+  '/sprytne-dodawanie-quiz.js',
   '/dzial-2-sprytne-odejmowanie.html',
+  '/sprytne-odejmowanie-quiz.js',
   '/polski.html',
   '/ortografia.html',
   '/ortografia-u-o.html',
