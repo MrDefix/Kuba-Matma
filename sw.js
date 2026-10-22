@@ -1,8 +1,22 @@
-const CACHE_NAME = 'matma-kuba-v10';
+const CACHE_NAME = 'matma-kuba-v17';
 const urlsToCache = [
   '/',
   '/index.html',
   '/matematyka.html',
+  '/matematyka-inne.html',
+  '/dzial-2-dodawanie-odejmowanie.html',
+  '/dzial-2-jak-zapisujemy-liczby.html',
+  '/zapis-liczb-quiz.js',
+  '/zapis-liczb.js',
+  '/zapis-liczb.css',
+  '/dzial-2-os-liczbowa.html',
+  '/os-liczbowa-quiz.js',
+  '/os-liczbowa.css',
+  '/dzial-2-dodawanie-odejmowanie-w-pamieci.html',
+  '/pamiec-quiz.js',
+  '/dzial-2-szacowanie.html',
+  '/dzial-2-sprytne-dodawanie.html',
+  '/dzial-2-sprytne-odejmowanie.html',
   '/polski.html',
   '/ortografia.html',
   '/ortografia-u-o.html',

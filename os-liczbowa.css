@@ -1,0 +1,8 @@
+.axis-drawing { max-width: 100%; overflow-x: auto; margin: 16px 0; padding: 8px 0; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: var(--bg-color); }
+.axis-drawing:focus-visible { outline: 2px solid var(--blue-neon); outline-offset: 4px; }
+.number-axis { display: block; width: 100%; min-width: 440px; color: var(--text-main); }
+.number-axis path { fill: none; stroke: currentColor; stroke-width: 2; }
+.number-axis text { fill: currentColor; font: 18px system-ui, sans-serif; }
+.number-axis circle { fill: var(--pink-neon); }
+.number-axis .axis-point { fill: var(--pink-neon); font-weight: 700; }
+.vertical-axis { width: 200px; min-width: 200px; max-width: 100%; margin: auto; }

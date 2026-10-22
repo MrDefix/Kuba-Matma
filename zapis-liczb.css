@@ -1,0 +1,17 @@
+.number-question { margin: 12px 0 24px; font-size: 1.25rem; line-height: 1.5; overflow-wrap: anywhere; }
+.task-category { color: var(--text-muted); font-size: 0.875rem; }
+.number-choices { display: grid; gap: 12px; }
+.number-choice { width: 100%; min-height: 48px; text-align: left; font-size: 1rem; font-weight: 500; line-height: 1.5; overflow-wrap: anywhere; }
+.history-button { min-height: 44px; padding: 8px 16px; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: var(--glass-bg); color: var(--blue-neon); font: inherit; cursor: pointer; }
+.history-button:focus-visible, .number-question:focus-visible { outline: 2px solid var(--blue-neon); outline-offset: 4px; }
+.number-page .quiz-status { margin-bottom: 8px; }
+.number-page .showing-explanation .history-button { margin-bottom: 16px; }
+#history-list { padding-left: 24px; }
+#history-list li { padding: 16px 0; border-bottom: 1px solid var(--glass-border); overflow-wrap: anywhere; }
+#history-list p { margin-top: 8px; }
+.history-correct { color: var(--blue-neon); }
+.history-incorrect { color: var(--error-color); }
+@media (max-width: 350px) {
+    .number-page header h1 { font-size: 1.5rem; }
+    .number-page .answer-counter { padding: 8px; }
+}

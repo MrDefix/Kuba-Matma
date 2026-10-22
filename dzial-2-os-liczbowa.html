@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oś liczbowa – Kuba uczy się!</title>
+    <meta name="description" content="Oś liczbowa – matematyka dla dzieci">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ortografia-u-o.css">
+    <link rel="stylesheet" href="zapis-liczb.css">
+    <link rel="stylesheet" href="os-liczbowa.css">
+    <script src="zapis-liczb-quiz.js" defer></script>
+    <script src="os-liczbowa-quiz.js" defer></script>
+    <script src="zapis-liczb.js" defer></script>
+</head>
+<body class="spelling-page number-page">
+    <header>
+        <h1>Oś liczbowa</h1>
+        <p>Wybierz odpowiedź i zatwierdź.</p>
+        <a href="dzial-2-dodawanie-odejmowanie.html" class="subject-back">‹ Dział II - Dodawanie i odejmowanie</a>
+    </header>
+    <main id="quiz-card" class="spelling-quiz">
+        <button id="show-history" class="history-button" type="button" aria-haspopup="dialog" aria-controls="history-sheet">Historia wyników</button>
+        <p id="status" class="quiz-status" role="status" aria-live="polite"></p>
+        <div id="axis-drawing" class="axis-drawing" tabindex="0" role="group" aria-label="Rysunek osi; w razie potrzeby przewijaj w poziomie" hidden></div>
+        <form id="quiz-form">
+            <p id="category" class="task-category"></p>
+            <h2 id="question" class="number-question" tabindex="-1"></h2>
+            <fieldset aria-labelledby="question">
+                <legend>Wybierz jedną odpowiedź</legend>
+                <div id="choices" class="number-choices"></div>
+            </fieldset>
+            <button id="submit-answer" class="quiz-button" type="submit" disabled>Zatwierdź</button>
+        </form>
+        <section id="explanation" class="quiz-explanation" aria-labelledby="explanation-title" tabindex="-1" hidden>
+            <h2 id="explanation-title">✕ Błędna odpowiedź</h2>
+            <p id="correction"></p>
+            <p id="rule"></p>
+            <button id="next-question" class="quiz-button" type="button">Dalej</button>
+        </section>
+        <noscript>Włącz JavaScript, aby rozwiązywać ćwiczenia.</noscript>
+    </main>
+    <footer class="answer-counters" aria-label="Wyniki ćwiczeń">
+        <div class="answer-counter correct-counter"><span>Poprawne</span><output id="correct-count" aria-live="polite">0</output></div>
+        <button id="show-mistakes" class="answer-counter incorrect-counter" type="button" aria-haspopup="dialog" aria-controls="history-sheet">
+            <span>Błędy ↑</span><span id="incorrect-count" aria-live="polite">0</span>
+        </button>
+    </footer>
+    <dialog id="history-sheet" class="mistakes-sheet" aria-labelledby="history-title">
+        <div class="mistakes-heading">
+            <h2 id="history-title">Historia wyników</h2>
+            <button id="close-history" class="sheet-close" type="button" aria-label="Zamknij historię">×</button>
+        </div>
+        <div class="mistakes-content">
+            <p id="history-empty">Nie ma jeszcze odpowiedzi.</p>
+            <ol id="history-list"></ol>
+        </div>
+    </dialog>
+</body>
+</html>
