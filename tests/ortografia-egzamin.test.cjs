@@ -7,9 +7,9 @@ test('progi ocen odpowiadają kartce, włącznie z granicami', () => {
     expected.forEach((value, score) => assert.equal(grade(score).value, value));
 });
 
-test('cztery różne zestawy mają po 17 + 10 + 3 punktów', () => {
-    assert.equal(sets.length, 4);
-    assert.equal(new Set(sets.map(set => JSON.stringify(set.words))).size, 4);
+test('dziesięć różnych zestawów ma po 17 + 10 + 3 punktów', () => {
+    assert.equal(sets.length, 10);
+    assert.equal(new Set(sets.map(set => JSON.stringify(set.words))).size, 10);
     for (const set of sets) {
         const used = new Set();
         const perfect = Object.fromEntries(set.sections.flatMap(section => section.fields.map(field => {

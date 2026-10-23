@@ -14,7 +14,19 @@
         { name: 'Zestaw 3', surname: 'Woźniak', daughter: 'Woźniakówna', ending: 'żarówka', end: 'stołu', start: 'usta',
             words: ['m_ózg', 'b_urza', 'sk_uwka', 'pi_órko', 'prac_uję', 'jask_ółka', 'mal_utki', 'z_upa', 'źr_ódło', 'miod_u'] },
         { name: 'Zestaw 4', surname: 'Mazur', daughter: 'Mazurówna', ending: 'Rzeszów', end: 'sklepu', start: 'ubranie',
-            words: ['ws_uwka', 'mr_óz', 'kr_uk', 'c_órka', 'pak_uję', 'g_óra', 'opiek_un', 'p_udełko', 's_ól', '_ósmy'] }
+            words: ['ws_uwka', 'mr_óz', 'kr_uk', 'c_órka', 'pak_uję', 'g_óra', 'opiek_un', 'p_udełko', 's_ól', '_ósmy'] },
+        { name: 'Zestaw 5', surname: 'Baran', daughter: 'Baranówna', ending: 'lodówka', end: 'parku', start: 'uczeń',
+            words: ['st_ół', 'n_óż', 'pi_óro', 'w_ujek', 'kog_ut', 'lod_ówka', 'bud_uję', 'ż_ółw', 'chm_ura', '_ósma'] },
+        { name: 'Zestaw 6', surname: 'Kruk', daughter: 'Krukówna', ending: 'Tarnów', end: 'ogrodu', start: 'ucho',
+            words: ['w_óz', 'd_ół', 'dł_ugopis', 'b_urak', 'kap_usta', 'gł_ówka', 'kup_uję', 'pł_ótno', 's_ukienka', '_ósemka'] },
+        { name: 'Zestaw 7', surname: 'Lis', daughter: 'Lisówna', ending: 'stołówka', end: 'autobusu', start: 'upominek',
+            words: ['l_ód', 'mi_ód', 'kr_ólik', 'k_ura', 'l_ustro', 'stoł_ówka', 'tańc_uje', 'ż_uraw', 'm_undur', 'wsch_ód'] },
+        { name: 'Zestaw 8', surname: 'Zając', daughter: 'Zającówna', ending: 'Lwów', end: 'telefonu', start: 'urząd',
+            words: ['r_óg', 'b_ór', 'wr_óżka', 'b_uty', 'ognisk_u', 'bib_uła', 'leśnicz_ówka', 'druk_uję', 'ob_óz', '_ucho'] },
+        { name: 'Zestaw 9', surname: 'Krawczyk', daughter: 'Krawczykówna', ending: 'makówka', end: 'cukru', start: 'uśmiech',
+            words: ['gł_ód', 'chł_ód', 'zbi_ór', 't_usz', 'b_ukiet', 'mak_ówka', 'dzięk_uję', 'p_ółka', 'k_ula', 'j_utro'] },
+        { name: 'Zestaw 10', surname: 'Adamczyk', daughter: 'Adamczykówna', ending: 'taksówka', end: 'zeszytu', start: 'ulewa',
+            words: ['nar_ód', 'powr_ót', 'pr_óba', 'f_utro', 'g_umka', 'taks_ówka', 'podr_óż', 'recyt_uję', 'm_uszla', 'r_ówny'] }
     ];
 
     function field(id, label, answers, group, kind = 'text') {
