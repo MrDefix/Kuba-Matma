@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egzamin u i ó – Kuba uczy się!</title>
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ortografia-egzamin.css">
+    <script src="ortografia-egzamin-data.js" defer></script>
+    <script src="ortografia-egzamin.js" defer></script>
+</head>
+<body class="exam-page">
+    <header>
+        <h1>EGZAMIN · u i ó</h1>
+        <p>Kartkówka dla klasy czwartej</p>
+        <a href="ortografia-u-o-menu.html" class="subject-back">‹ Pisownia u i ó</a>
+    </header>
+    <main>
+        <section id="set-picker" aria-labelledby="picker-title">
+            <h2 id="picker-title" tabindex="-1">Wybierz zestaw</h2>
+            <p>Każdy zestaw: 3 zadania, 30 punktów. Wynik i poprawne odpowiedzi zobaczysz po oddaniu testu.</p>
+            <div id="sets" class="set-grid"></div>
+        </section>
+        <section id="exam" hidden aria-labelledby="exam-title">
+            <h2 id="exam-title" tabindex="-1"></h2>
+            <p id="progress" role="status"></p>
+            <p class="exam-help">1 punkt za każde poprawne pole. Puste pola: 0 punktów. Możesz zmieniać odpowiedzi do oddania testu.</p>
+            <form id="exam-form" autocomplete="off">
+                <div id="tasks"></div>
+                <button type="submit" class="exam-button">Oddaj test i sprawdź ocenę</button>
+            </form>
+        </section>
+        <section id="result" class="result" hidden aria-labelledby="result-title">
+            <h2 id="result-title" tabindex="-1"></h2>
+            <p id="grade"></p>
+            <ul id="breakdown"></ul>
+            <p>Niżej znajdziesz sprawdzony test i poprawne odpowiedzi.</p>
+            <button id="choose-set" type="button" class="exam-button">Wybierz kolejny zestaw</button>
+        </section>
+        <aside class="grading" aria-labelledby="grading-title">
+            <h2 id="grading-title">Punktacja z kartkówki</h2>
+            <p>29–30 pkt: 6 (celujący) · 27–28 pkt: 5 (bardzo dobry) · 23–26 pkt: 4 (dobry) · 16–22 pkt: 3 (dostateczny) · 9–15 pkt: 2 (dopuszczający) · 0–8 pkt: 1 (niedostateczny)</p>
+        </aside>
+        <noscript>Włącz JavaScript, aby rozwiązać egzamin.</noscript>
+    </main>
+</body>
+</html>

@@ -6,6 +6,8 @@ Moduł „Jak zapisujemy liczby” zawiera losowane pytania wyboru z odczytywani
 
 Testy: `npm test`.
 
+„Język Polski → Ortografia → Pisownia u i ó → EGZAMIN” zawiera cztery zestawy oparte na kartkówce: zasady pisowni (17 pkt), uzupełnianie wyrazów (10 pkt), trzy wyjątki (3 pkt). Wynik, ocena i poprawki pojawiają się po oddaniu testu. Powtórzone odpowiedzi w tej samej grupie nie zwiększają punktacji. Progi: 29–30 = 6, 27–28 = 5, 23–26 = 4, 16–22 = 3, 9–15 = 2, 0–8 = 1. Ostatnie wyniki zestawów są widoczne do odświeżenia strony. Moduł działa również offline po zapisaniu zasobów przez aplikację.
+
 Moduł „Oś liczbowa” używa tego samego mechanizmu odpowiedzi i historii. Pytania obejmują odczytywanie punktów, skalę, odliczanie wstecz, wybór punktu dla podanej liczby, liczby między kreskami i pomiary na osiach poziomych oraz pionowych. Rysunki osi są zachowane w historii; na wąskim ekranie można je przewijać poziomo.
 
 Moduł „Dodawanie i odejmowanie w pamięci” zawiera rachunki na poziomach A–D i Mistrz, działania na liczbach z zerami, sprawdzanie odejmowania, brakujące liczby, nazwy działań, zadania tekstowe i hasła. Korzysta z tego samego mechanizmu losowania, liczników, wyjaśnień i historii bieżącej sesji.

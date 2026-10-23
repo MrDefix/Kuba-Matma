@@ -1,4 +1,4 @@
-const CACHE_NAME = 'matma-kuba-v20';
+const CACHE_NAME = 'matma-kuba-v21';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -22,6 +22,11 @@ const urlsToCache = [
   '/sprytne-odejmowanie-quiz.js',
   '/polski.html',
   '/ortografia.html',
+  '/ortografia-u-o-menu.html',
+  '/ortografia-egzamin.html',
+  '/ortografia-egzamin-data.js',
+  '/ortografia-egzamin.js',
+  '/ortografia-egzamin.css',
   '/ortografia-u-o.html',
   '/ortografia-u-o-quiz.js',
   '/ortografia-u-o.js',

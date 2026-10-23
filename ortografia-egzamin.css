@@ -1,0 +1,38 @@
+.exam-page { padding: 24px 16px; }
+.exam-page header { margin-bottom: 24px; padding: 16px 0; }
+.exam-page header h1 { font-size: clamp(1.6rem, 6vw, 2.5rem); }
+.exam-page main { display: flex; flex-direction: column; max-width: 800px; padding: 0; gap: 24px; }
+.exam-page [hidden] { display: none !important; }
+.exam-page h2 { font-size: 1.25rem; margin-bottom: 12px; }
+.exam-page p { line-height: 1.6; }
+.set-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+.set-grid .tile { cursor: pointer; font: inherit; color: var(--text-main); }
+.set-grid strong, .set-grid small { display: block; margin-top: 8px; }
+.set-grid small, .exam-help, #progress, .grading { color: var(--text-muted); }
+.exam-help { margin: 12px 0 24px; }
+.exam-task, .result, .grading { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 24px; }
+.exam-task { margin: 0 0 24px; min-width: 0; }
+.exam-task legend { font-weight: 700; padding: 0 8px; }
+.task-fields { display: grid; gap: 16px; margin-top: 24px; }
+.exam-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.exam-field label { line-height: 1.5; }
+.exam-field input, .exam-field select { width: 100%; min-height: 48px; padding: 12px; background: var(--bg-color); color: var(--text-main); border: 2px solid var(--glass-border); border-radius: var(--radius-sm); font: inherit; }
+.exam-field select { cursor: pointer; }
+.word-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.word-fields label { font-size: 1.25rem; overflow-wrap: anywhere; }
+.exam-button { width: 100%; min-height: 48px; padding: 16px; background: var(--blue-neon); color: var(--bg-color); border: 0; border-radius: var(--radius-md); font: inherit; font-weight: 700; cursor: pointer; margin-top: 16px; }
+.exam-page :is(button, input, select, [tabindex]):focus-visible { outline: 2px solid var(--blue-neon); outline-offset: 4px; }
+.exam-field.is-wrong :is(input, select) { border-color: #f87171; }
+.exam-field.is-wrong .field-feedback { color: #fca5a5; }
+.exam-field.is-correct :is(input, select) { border-color: #4ade80; }
+.exam-field.is-correct .field-feedback { color: #86efac; }
+.field-feedback { font-size: .875rem; line-height: 1.5; overflow-wrap: anywhere; }
+.result { order: -1; border-color: var(--blue-neon); }
+#grade { color: var(--pink-neon); font-size: 1.5rem; font-weight: 700; }
+#breakdown { padding-left: 24px; margin: 16px 0; line-height: 1.8; }
+.grading h2 { color: var(--text-main); font-size: 1rem; }
+@media (max-width: 480px) {
+    .exam-task, .result, .grading { padding: 16px; }
+    .word-fields { grid-template-columns: 1fr; }
+    .set-grid .tile { padding: 24px 12px; }
+}
