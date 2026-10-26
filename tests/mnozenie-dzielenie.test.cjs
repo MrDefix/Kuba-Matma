@@ -145,3 +145,24 @@ test('strona i wszystkie nowe zasoby są dostępne w cache offline', () => {
     }
     assert.ok(html.indexOf('src="mnozenie-dzielenie-quiz.js"') < html.indexOf('src="mnozenie-dzielenie.js"'));
 });
+
+test('reset usuwa wyniki, postęp, błędy i kolejkę powtórek, zachowując ustawienia', () => {
+    const quiz = createPractice({ random: () => 0 });
+    quiz.configure({ operation: 'mul', practice: 'learn', tables: [7] });
+    quiz.submit(String(quiz.current.answer));
+    quiz.submit('101');
+    const settings = quiz.settings;
+    quiz.reset();
+    assert.equal(quiz.correct, 0);
+    assert.equal(quiz.incorrect, 0);
+    assert.deepEqual(quiz.facts, {});
+    assert.deepEqual(quiz.mistakes, []);
+    assert.deepEqual(quiz.settings, settings);
+    assert.equal(quiz.phase, 'question');
+    assert.equal(quiz.current.prompt, '1 × 7 = ?');
+    const restored = createPractice({ saved: JSON.stringify(quiz.snapshot()) });
+    assert.equal(restored.correct + restored.incorrect, 0);
+    assert.equal(restored.progress(7).mastered, 0);
+    restored.configure({ practice: 'mistakes' });
+    assert.equal(restored.current, null);
+});

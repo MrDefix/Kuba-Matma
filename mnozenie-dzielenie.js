@@ -125,6 +125,14 @@
         }
     }
     $('all-tables').addEventListener('click', () => configure({ tables: TABLES }));
+    $('reset-results').addEventListener('click', () => {
+        if (!window.confirm('Wyczyścić wyniki, postęp i historię błędów tej kategorii? Ustawienia ćwiczeń zostaną zachowane.')) return;
+        quiz.reset();
+        $('mistakes-list').replaceChildren();
+        $('mistakes-empty').hidden = false;
+        render('Wyniki zostały wyczyszczone.');
+        save();
+    });
     $('start-training').addEventListener('click', () => {
         configure({ practice: 'train' });
         $('answer').focus({ preventScroll: true });

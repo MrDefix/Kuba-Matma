@@ -137,6 +137,15 @@
             get correct() { return Object.values(facts).reduce((n,f) => n+f.correct,0); },
             get incorrect() { return Object.values(facts).reduce((n,f) => n+f.wrong,0); },
             facts, mistakes, submit, next,
+            reset() {
+                for (const key of Object.keys(facts)) delete facts[key];
+                mistakes.length = 0;
+                due.clear();
+                answered = 0;
+                cursor = 0;
+                current = null;
+                next();
+            },
             configure(changes) {
                 settings = settingsFor({ ...settings, ...changes });
                 pool = buildTasks(settings);
