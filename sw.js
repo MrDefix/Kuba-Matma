@@ -1,4 +1,4 @@
-const CACHE_NAME = 'matma-kuba-v22';
+const CACHE_NAME = 'matma-kuba-v23';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -35,6 +35,9 @@ const urlsToCache = [
   '/ortografia-h-ch.html',
   '/dodawanie-100.html',
   '/mnozenie-dzielenie.html',
+  '/mnozenie-dzielenie-quiz.js',
+  '/mnozenie-dzielenie.js',
+  '/mnozenie-dzielenie.css',
   '/dodawanie-pod-kreska.html',
   '/odejmowanie-pod-kreska.html',
   '/components.css',

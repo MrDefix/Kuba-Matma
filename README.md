@@ -6,6 +6,8 @@ Moduł „Jak zapisujemy liczby” zawiera losowane pytania wyboru z odczytywani
 
 Testy: `npm test`.
 
+„Matematyka → Inne → Mnożenie i dzielenie” ćwiczy pełną tabliczkę 1–10 (iloczyny do 100, dzielenie bez reszty). Można wybrać pojedynczą lub kilka tabliczek oraz mnożenie, dzielenie albo działania mieszane. „Nauka” prowadzi po kolei i udostępnia podpowiedzi; „Trening” losuje także brakujące czynniki, dzielne i dzielniki. Błędne działanie wraca po trzech innych odpowiedziach. „Moje błędy” powtarza nieopanowane działania z wybranych tabliczek. Trzy kolejne poprawne odpowiedzi bez podpowiedzi oznaczają opanowanie działania; mnożenie i dzielenie liczone są osobno. Błąd pokazuje czerwone wyjaśnienie i czeka na „Dalej”. Ustawienia, liczniki, postęp i historia błędów są zapisywane lokalnie na urządzeniu. Przy niedostępnym zapisie ćwiczenia działają w bieżącej sesji. Moduł jest dostępny offline po zapisaniu zasobów przez aplikację.
+
 „Język Polski → Ortografia → Pisownia u i ó → EGZAMIN” zawiera dziesięć zestawów opartych na kartkówce: zasady pisowni (17 pkt), uzupełnianie wyrazów (10 pkt), trzy wyjątki (3 pkt). Wynik, ocena i poprawki pojawiają się po oddaniu testu. Powtórzone odpowiedzi w tej samej grupie nie zwiększają punktacji. Progi: 29–30 = 6, 27–28 = 5, 23–26 = 4, 16–22 = 3, 9–15 = 2, 0–8 = 1. Ostatnie wyniki zestawów są widoczne do odświeżenia strony. Moduł działa również offline po zapisaniu zasobów przez aplikację.
 
 Moduł „Oś liczbowa” używa tego samego mechanizmu odpowiedzi i historii. Pytania obejmują odczytywanie punktów, skalę, odliczanie wstecz, wybór punktu dla podanej liczby, liczby między kreskami i pomiary na osiach poziomych oraz pionowych. Rysunki osi są zachowane w historii; na wąskim ekranie można je przewijać poziomo.

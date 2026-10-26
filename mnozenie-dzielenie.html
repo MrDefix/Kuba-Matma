@@ -1,216 +1,98 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mnożenie i dzielenie (0–100)</title>
-  <meta name="description" content="Zestaw ćwiczeń z matematyki dla dzieci - mnożenie i dzielenie">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabliczka mnożenia i dzielenia do 100</title>
+  <meta name="description" content="Ucz się tabliczki mnożenia i dzielenia do 100. Wybierz tabliczki, ćwicz brakujące liczby i powtarzaj błędy.">
   <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="components.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    .exercise-container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 24px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-
-    #task {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 24px 0;
-      color: var(--text-main);
-      text-shadow: 0 0 15px rgba(248, 250, 252, 0.2);
-    }
-
-    #result {
-      margin-top: 20px;
-      font-size: 1.25rem;
-      font-weight: 600;
-      min-height: 32px;
-      padding: 12px 20px;
-      border-radius: var(--radius-md);
-    }
-
-    #result.success {
-      color: #4ade80;
-      background: rgba(74, 222, 128, 0.15);
-    }
-
-    #result.error {
-      color: #f87171;
-      background: rgba(248, 113, 113, 0.15);
-    }
-
-    .stats {
-      margin-top: 20px;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .stats span {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    .stats .correct-count {
-      color: #4ade80;
-    }
-
-    .stats .incorrect-count {
-      color: #f87171;
-    }
-  </style>
+  <link rel="stylesheet" href="mnozenie-dzielenie.css">
+  <script src="mnozenie-dzielenie-quiz.js" defer></script>
+  <script src="mnozenie-dzielenie.js" defer></script>
 </head>
-
-<body class="with-header horizontal-layout">
-  <div class="header">
-    <div class="header-left">
-      <a href="matematyka-inne.html" class="btn-back">‹</a>
-      <h1>Mnożenie i dzielenie</h1>
-    </div>
-    <button class="hamburger" onclick="toggleHistory()">☰</button>
-  </div>
-
-  <div class="main">
-    <div class="exercise-container">
-      <div class="mode-selector">
-        <input type="radio" name="mode" value="mixed" id="mode-mixed" checked onchange="setMode(this.value)">
-        <label for="mode-mixed">Mieszane</label>
-        <input type="radio" name="mode" value="mul" id="mode-mul" onchange="setMode(this.value)">
-        <label for="mode-mul">Mnożenie</label>
-        <input type="radio" name="mode" value="div" id="mode-div" onchange="setMode(this.value)">
-        <label for="mode-div">Dzielenie</label>
+<body class="tables-page">
+  <header class="tables-header">
+    <a href="matematyka-inne.html" class="tables-back">‹ Matematyka</a>
+    <h1>Mnożenie i dzielenie</h1>
+    <p>Tabliczka 1–10 · wyniki do 100 · bez pośpiechu</p>
+  </header>
+  <main class="tables-layout">
+    <details id="settings" class="tables-panel settings-panel">
+      <summary id="settings-summary">Ustawienia ćwiczeń</summary>
+      <div class="settings-content">
+        <fieldset>
+          <legend>Co ćwiczysz?</legend>
+          <div class="option-list">
+            <label><input type="radio" name="operation" value="mixed" checked> Mieszane</label>
+            <label><input type="radio" name="operation" value="mul"> Mnożenie</label>
+            <label><input type="radio" name="operation" value="div"> Dzielenie</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Jak ćwiczysz?</legend>
+          <div class="option-list">
+            <label><input type="radio" name="practice" value="learn"> Nauka <small>Po kolei, z podpowiedzią</small></label>
+            <label><input type="radio" name="practice" value="train" checked> Trening <small>Losowo, także brakujące liczby</small></label>
+            <label><input type="radio" name="practice" value="mistakes"> Moje błędy <small>Powtarzaj trudne działania</small></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Wybierz tabliczki</legend>
+          <p class="settings-help">Mnożenie przez wybraną liczbę i dzielenie przez nią.</p>
+          <button id="all-tables" class="secondary-button all-tables" type="button" aria-pressed="true">Wszystkie</button>
+          <div id="table-choices" class="table-choices"></div>
+          <p id="selection-status" class="settings-help" role="status"></p>
+        </fieldset>
       </div>
-
-      <div id="task">Ładowanie zadania...</div>
-      <input type="number" id="answer" class="exercise-input" placeholder="?" /><br />
-      <button class="btn-check" onclick="checkAnswer()">Sprawdź</button>
-      <div id="result"></div>
-      <div class="stats">
-        Poprawne: <span class="correct-count" id="correct">0</span> | Błędne: <span class="incorrect-count"
-          id="incorrect">0</span>
-      </div>
+    </details>
+    <div class="practice-column">
+      <section id="exercise" class="tables-panel exercise-panel" aria-label="Ćwiczenie">
+        <p id="exercise-context" class="exercise-context"></p>
+        <p id="status" class="exercise-status" role="status" aria-live="polite"></p>
+        <form id="answer-form" novalidate>
+          <h2 id="task" class="table-task"></h2>
+          <label for="answer">Wpisz brakującą liczbę</label>
+          <input id="answer" name="answer" type="text" inputmode="numeric" autocomplete="off" maxlength="6" aria-describedby="status" enterkeyhint="done">
+          <button id="check-answer" class="primary-button" type="submit">Sprawdź</button>
+          <button id="show-hint" class="secondary-button hint-button" type="button" aria-expanded="false" aria-controls="hint" hidden>Podpowiedź</button>
+          <p id="hint" class="hint" hidden></p>
+        </form>
+        <section id="explanation" class="error-explanation" aria-labelledby="error-title" hidden>
+          <h2 id="error-title">✕ Błędna odpowiedź</h2>
+          <p id="wrong-answer"></p>
+          <p id="correction" class="correction"></p>
+          <p id="rule"></p>
+          <p>To działanie wróci do powtórki.</p>
+          <button id="next-task" class="primary-button" type="button">Dalej</button>
+        </section>
+        <section id="empty-state" class="empty-state" hidden>
+          <h2>Nie ma działań do powtórki</h2>
+          <p>Dla wybranych tabliczek nie masz nieopanowanych błędów. Wybierz inne tabliczki lub wróć do treningu.</p>
+          <button id="start-training" class="primary-button" type="button">Przejdź do treningu</button>
+        </section>
+        <noscript>Włącz JavaScript, aby ćwiczyć tabliczkę mnożenia.</noscript>
+      </section>
+      <details class="tables-panel progress-panel">
+        <summary id="progress-summary">Twój postęp</summary>
+        <p class="progress-help">Działanie jest opanowane po 3 kolejnych poprawnych odpowiedziach bez podpowiedzi. Mnożenie i dzielenie liczymy osobno.</p>
+        <div id="progress-list"></div>
+      </details>
+      <p id="storage-status" class="storage-status" role="status">Postęp i błędy zapisują się na tym urządzeniu.</p>
     </div>
-  </div>
-
-  <div class="history" id="historyPanel">
-    <div class="history-header">
-      <h3>Historia zadań</h3>
-      <button class="close-history" onclick="toggleHistory()">×</button>
-    </div>
-    <div id="historyLog"></div>
-  </div>
-
-  <script>
-    let a, b, op, correctAnswer;
-    let correct = 0;
-    let incorrect = 0;
-    let mode = "mixed";
-    let taskNumber = 1;
-
-    function setMode(newMode) {
-      mode = newMode;
-      generateTask();
-    }
-
-    function isUnwantedResult(result) {
-      const forbidden = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-      return forbidden.includes(result);
-    }
-
-    function toggleHistory() {
-      document.getElementById('historyPanel').classList.toggle('active');
-    }
-
-    function generateTask() {
-      do {
-        if (mode === "mul" || (mode === "mixed" && Math.random() < 0.5)) {
-          op = '×';
-          a = Math.floor(Math.random() * 9) + 2;
-          b = Math.floor(Math.random() * 9) + 2;
-          correctAnswer = a * b;
-        } else {
-          op = '÷';
-          b = Math.floor(Math.random() * 9) + 2;
-          correctAnswer = Math.floor(Math.random() * 9) + 2;
-          a = b * correctAnswer;
-        }
-      } while (isUnwantedResult(correctAnswer));
-
-      document.getElementById("task").innerText = `${a} ${op} ${b} = ?`;
-      document.getElementById("answer").value = '';
-      document.getElementById("result").innerText = '';
-      document.getElementById("result").className = '';
-      document.getElementById("answer").focus();
-    }
-
-    function checkAnswer() {
-      const userAnswer = parseInt(document.getElementById("answer").value, 10);
-
-      if (isNaN(userAnswer)) {
-        const result = document.getElementById("result");
-        result.innerText = "Wpisz poprawną liczbę.";
-        result.className = "error";
-        return;
-      }
-
-      const isCorrect = userAnswer === correctAnswer;
-      const history = document.getElementById("historyLog");
-      const entry = document.createElement("div");
-      entry.className = "entry " + (isCorrect ? "correct" : "incorrect");
-      const symbol = isCorrect ? '✓' : '✗';
-      entry.textContent = `${taskNumber}. ${a} ${op} ${b} = ${userAnswer} ${symbol}`;
-      history.prepend(entry);
-
-      const result = document.getElementById("result");
-      if (isCorrect) {
-        result.innerHTML = "Dobrze!";
-        result.className = "success";
-        correct++;
-      } else {
-        result.innerHTML = `Błąd! Poprawna odpowiedź: ${correctAnswer}`;
-        result.className = "error";
-        incorrect++;
-      }
-
-      document.getElementById("correct").innerText = correct;
-      document.getElementById("incorrect").innerText = incorrect;
-
-      taskNumber++;
-      setTimeout(generateTask, 1500);
-    }
-
-    document.getElementById("answer").addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        checkAnswer();
-      }
-    });
-
-    generateTask();
-  </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(function() {
-        console.log('Service Worker zarejestrowany');
-      }).catch(function(err) {
-        console.log('Rejestracja SW nie powiodła się:', err);
-      });
-    }
-  </script>
+  </main>
+  <footer class="tables-counters" aria-label="Wyniki ćwiczeń">
+    <div class="counter correct-counter"><span>Poprawne</span><output id="correct-count">0</output></div>
+    <button id="show-mistakes" class="counter incorrect-counter" type="button" aria-haspopup="dialog" aria-controls="mistakes-sheet" aria-expanded="false"><span>Błędy ↑</span><span id="incorrect-count">0</span></button>
+  </footer>
+  <dialog id="mistakes-sheet" class="tables-sheet" aria-labelledby="mistakes-title">
+    <div class="sheet-heading"><h2 id="mistakes-title">Historia błędów</h2><button id="close-mistakes" class="secondary-button" type="button" aria-label="Zamknij historię błędów">×</button></div>
+    <p id="mistakes-empty">Nie masz jeszcze błędów.</p>
+    <ol id="mistakes-list"></ol>
+  </dialog>
 </body>
-
 </html>
