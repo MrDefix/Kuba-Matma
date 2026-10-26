@@ -120,3 +120,28 @@ test('postęp rozróżnia mnożenie od dzielenia i pokazuje liczbę opanowanych 
     quiz.configure({ operation: 'div' });
     assert.equal(quiz.progress(1).mastered, 0);
 });
+
+test('podpowiedź przerywa serię samodzielnych odpowiedzi', () => {
+    const quiz = createPractice({ random: () => 0 });
+    quiz.configure({ practice: 'learn', operation: 'mul', tables: [7] });
+    const fact = quiz.current.fact;
+    for (let i = 0; i < 20; i++) quiz.submit(String(quiz.current.answer));
+    assert.equal(quiz.facts[fact].streak, 2);
+    quiz.hint();
+    quiz.submit(String(quiz.current.answer));
+    assert.equal(quiz.facts[fact].streak, 0);
+});
+
+test('strona i wszystkie nowe zasoby są dostępne w cache offline', () => {
+    const fs = require('node:fs');
+    const path = require('node:path');
+    const root = path.join(__dirname,'..');
+    const html = fs.readFileSync(path.join(root,'mnozenie-dzielenie.html'),'utf8');
+    const worker = fs.readFileSync(path.join(root,'sw.js'),'utf8');
+    for (const asset of ['mnozenie-dzielenie.css','mnozenie-dzielenie.js','mnozenie-dzielenie-quiz.js']) {
+        assert.ok(html.includes(asset));
+        assert.ok(worker.includes(`'/${asset}'`));
+        assert.ok(fs.existsSync(path.join(root,asset)));
+    }
+    assert.ok(html.indexOf('src="mnozenie-dzielenie-quiz.js"') < html.indexOf('src="mnozenie-dzielenie.js"'));
+});
